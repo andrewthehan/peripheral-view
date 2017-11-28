@@ -1,0 +1,37 @@
+{
+  "name": "peripheral-view",
+  "version": "0.1.0",
+  "description": "React component for rendering a sliding window view of elements.",
+  "main": "index.js",
+  "dependencies": {
+    "react": "^16.1.1",
+    "react-dom": "^16.1.1",
+    "react-waypoint": "^7.3.1"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-preset-env": "^1.6.1",
+    "babel-preset-react": "^6.24.1"
+  },
+  "scripts": {
+    "build": "babel src/PeripheralView.js > index.js",
+    "clean": "rm index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/andrewthehan/peripheral-view.git"
+  },
+  "keywords": [
+    "react",
+    "peripheral",
+    "view",
+    "lazy",
+    "render"
+  ],
+  "author": "Andrew Han",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/andrewthehan/peripheral-view/issues"
+  },
+  "homepage": "https://github.com/andrewthehan/peripheral-view#readme"
+}
