@@ -42,7 +42,6 @@ class PeripheralView extends Component {
   handleWaypoint(wp, index) {
     const { previousPosition, currentPosition } = wp;
 
-    console.log('inScreen', index, previousPosition, currentPosition);
     if(previousPosition === Waypoint.above || previousPosition === Waypoint.below){
       this.setState({
         currentIndex: index
@@ -51,51 +50,31 @@ class PeripheralView extends Component {
   }
 
   render() {
-    const { length, radius, renderMap, style } = this.props;
+    const { length, radius, renderMap } = this.props;
     const { currentIndex, isScrolling } = this.state;
-    console.log(currentIndex);
 
     if(isScrolling) {
-      return (
-        <div style={style} />
-      );
+      return [];
     }
 
     const start = Math.max(0, currentIndex - radius);
     const end = Math.min(length, currentIndex + radius);
 
-    const view = [];
+    const waypoints = [];
     for(let i = start; i < end; ++i){
-      const element = renderMap(i);
-      const WithInnerRefComponent = withInnerRef(element.type);
-      const component = React.createElement(WithInnerRefComponent, element.props);
-
-      view[i - start] = (
+      waypoints[i - start] = (
         <Waypoint
           {...(i === currentIndex ? { ref: r => this.currentElement = r } : {})}
-          key={i}
+          key={-(i + 1)}
           onEnter={wp => this.handleWaypoint(wp, i)}
           fireOnRapidScroll
-        >
-          {component}
-        </Waypoint>
+        />
       );
     }
 
-    return (
-      <div style={style}>
-        {view}
-      </div>
-    );
+    const view = waypoints.reduce((a, x, i) => a.concat(x, renderMap(i + start)), []);
+    return view;
   }
 }
 
 export default PeripheralView;
-
-function withInnerRef(WrappedComponent) {
-  return class WithInnerRef extends WrappedComponent {
-    render() {
-      return React.cloneElement(super.render(), { ref: this.props.innerRef });
-    }
-  }
-}

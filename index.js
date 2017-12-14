@@ -4,8 +4,6 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _get = function get(object, property, receiver) { if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { return get(parent, property, receiver); } } else if ("value" in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } };
-
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -79,7 +77,6 @@ var PeripheralView = function (_Component) {
           currentPosition = wp.currentPosition;
 
 
-      console.log('inScreen', index, previousPosition, currentPosition);
       if (previousPosition === _reactWaypoint2.default.above || previousPosition === _reactWaypoint2.default.below) {
         this.setState({
           currentIndex: index
@@ -94,52 +91,41 @@ var PeripheralView = function (_Component) {
       var _props = this.props,
           length = _props.length,
           radius = _props.radius,
-          renderMap = _props.renderMap,
-          style = _props.style;
+          renderMap = _props.renderMap;
       var _state = this.state,
           currentIndex = _state.currentIndex,
           isScrolling = _state.isScrolling;
 
-      console.log(currentIndex);
 
       if (isScrolling) {
-        return _react2.default.createElement('div', { style: style });
+        return [];
       }
 
       var start = Math.max(0, currentIndex - radius);
       var end = Math.min(length, currentIndex + radius);
 
-      var view = [];
+      var waypoints = [];
 
       var _loop = function _loop(i) {
-        var element = renderMap(i);
-        var WithInnerRefComponent = withInnerRef(element.type);
-        var component = _react2.default.createElement(WithInnerRefComponent, element.props);
-
-        view[i - start] = _react2.default.createElement(
-          _reactWaypoint2.default,
-          _extends({}, i === currentIndex ? { ref: function ref(r) {
-              return _this2.currentElement = r;
-            } } : {}, {
-            key: i,
-            onEnter: function onEnter(wp) {
-              return _this2.handleWaypoint(wp, i);
-            },
-            fireOnRapidScroll: true
-          }),
-          component
-        );
+        waypoints[i - start] = _react2.default.createElement(_reactWaypoint2.default, _extends({}, i === currentIndex ? { ref: function ref(r) {
+            return _this2.currentElement = r;
+          } } : {}, {
+          key: -(i + 1),
+          onEnter: function onEnter(wp) {
+            return _this2.handleWaypoint(wp, i);
+          },
+          fireOnRapidScroll: true
+        }));
       };
 
       for (var i = start; i < end; ++i) {
         _loop(i);
       }
 
-      return _react2.default.createElement(
-        'div',
-        { style: style },
-        view
-      );
+      var view = waypoints.reduce(function (a, x, i) {
+        return a.concat(x, renderMap(i + start));
+      }, []);
+      return view;
     }
   }]);
 
@@ -147,26 +133,4 @@ var PeripheralView = function (_Component) {
 }(_react.Component);
 
 exports.default = PeripheralView;
-
-
-function withInnerRef(WrappedComponent) {
-  return function (_WrappedComponent) {
-    _inherits(WithInnerRef, _WrappedComponent);
-
-    function WithInnerRef() {
-      _classCallCheck(this, WithInnerRef);
-
-      return _possibleConstructorReturn(this, (WithInnerRef.__proto__ || Object.getPrototypeOf(WithInnerRef)).apply(this, arguments));
-    }
-
-    _createClass(WithInnerRef, [{
-      key: 'render',
-      value: function render() {
-        return _react2.default.cloneElement(_get(WithInnerRef.prototype.__proto__ || Object.getPrototypeOf(WithInnerRef.prototype), 'render', this).call(this), { ref: this.props.innerRef });
-      }
-    }]);
-
-    return WithInnerRef;
-  }(WrappedComponent);
-}
 
