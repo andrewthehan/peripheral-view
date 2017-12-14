@@ -30,7 +30,20 @@ class PeripheralView extends Component {
     }
 
     if(!isScrolling){
-      ReactDOM.findDOMNode(this.currentElement).scrollIntoView();
+      const node = ReactDOM.findDOMNode(this.currentElement);
+
+      let scrollableParent = node;
+      let isScrollable;
+      do {
+        scrollableParent = scrollableParent.parentNode;
+        if(scrollableParent == null){
+          throw new Error('Unable to find scrollable parent.');
+        }
+        const overflowY = window.getComputedStyle(scrollableParent).overflowY;
+        isScrollable = overflowY !== 'visible' && overflowY !== 'hidden';
+      } while(!isScrollable || scrollableParent.scrollHeight < scrollableParent.clientHeight);
+      
+      scrollableParent.scrollTop = node.offsetTop - scrollableParent.offsetTop;
     }
     else {
       this.setState({

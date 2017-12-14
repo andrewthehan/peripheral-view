@@ -14,7 +14,7 @@ import PeripheralView from 'peripheral-view';
   ref={r => this.view = r}
   length={1000}
   radius={100}
-  renderMap={i => <div key={i}>Item #{i}</div>}
+  renderMap={i => <div key={i}>{i}</div>}
 />
 
 this.view.scrollTo(250);
@@ -29,7 +29,7 @@ The maximum number of elements. To create a view with an infinite number of elem
 #### radius
 *type: `number`*
 
-The number of elements to render adjacent to the current element. This value must be large enough such that when the current view is rendered, there exists elements rendered outside of the window viewport.
+The number of elements to render adjacent to both sides of the current element. This value must be large enough such that when the current view is rendered, there exists elements rendered outside of the window viewport.
 
 #### renderMap
 *type: `number => React element`*
@@ -40,4 +40,4 @@ A mapping function from element index to React element. The React element return
 #### scrollTo
 *type: `number => void`*
 
-Make the input index the current element. This brings the corresponding element to view.
+Make the input index the current element. This brings the corresponding element to view by changing the scroll location of the nearest scrollable ancestor.

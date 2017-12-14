@@ -63,7 +63,20 @@ var PeripheralView = function (_Component) {
       }
 
       if (!isScrolling) {
-        _reactDom2.default.findDOMNode(this.currentElement).scrollIntoView();
+        var node = _reactDom2.default.findDOMNode(this.currentElement);
+
+        var scrollableParent = node;
+        var isScrollable = void 0;
+        do {
+          scrollableParent = scrollableParent.parentNode;
+          if (scrollableParent == null) {
+            throw new Error('Unable to find scrollable parent.');
+          }
+          var overflowY = window.getComputedStyle(scrollableParent).overflowY;
+          isScrollable = overflowY !== 'visible' && overflowY !== 'hidden';
+        } while (!isScrollable || scrollableParent.scrollHeight < scrollableParent.clientHeight);
+
+        scrollableParent.scrollTop = node.offsetTop - scrollableParent.offsetTop;
       } else {
         this.setState({
           isScrolling: false
