@@ -31,7 +31,7 @@ The maximum number of elements. To create a view with an infinite number of elem
 #### radius
 *type: `number`*
 
-The number of elements to render adjacent to both sides of the current element. This value must be large enough such that when the current view is rendered, there exists elements rendered outside of the window viewport.
+The number of elements to render adjacent to both sides of the current element. This value must be large enough such that when the current view is rendered, there exists elements rendered outside of the scrolling viewport.
 
 #### renderMap
 *type: `number => React element`*
