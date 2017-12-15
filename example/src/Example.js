@@ -39,10 +39,7 @@ class Example extends Component {
   renderMap={${renderMapString}}
 />
 
-<button
-  style={style.button}
-  onClick={() => this.view.scrollTo(250)}
->
+<button onClick={() => this.view.scrollTo(250)}>
   Scroll To 250
 </button>`;
 
