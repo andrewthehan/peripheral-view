@@ -1,6 +1,8 @@
 # peripheral-view [![npm](https://img.shields.io/npm/v/peripheral-view.svg?maxAge=86400)](https://www.npmjs.com/package/peripheral-view)
 React component for rendering a sliding window view of elements.
 
+[Live demo](https://andrewthehan.github.io/peripheral-view/)
+
 ## Installation
 ```
 npm install peripheral-view --save
