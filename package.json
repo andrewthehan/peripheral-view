@@ -1,6 +1,6 @@
 {
   "name": "peripheral-view",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "React component for rendering a sliding window view of elements.",
   "main": "index.js",
   "dependencies": {
