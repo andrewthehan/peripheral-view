@@ -26,7 +26,10 @@
     "peripheral",
     "view",
     "lazy",
-    "render"
+    "render",
+    "infinite",
+    "list",
+    "scrollTo"
   ],
   "author": "Andrew Han",
   "license": "MIT",
