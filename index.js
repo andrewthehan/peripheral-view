@@ -18,8 +18,6 @@ var _reactDom2 = _interopRequireDefault(_reactDom);
 
 var _reactWaypoint = require('react-waypoint');
 
-var _reactWaypoint2 = _interopRequireDefault(_reactWaypoint);
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -90,7 +88,7 @@ var PeripheralView = function (_Component) {
           currentPosition = wp.currentPosition;
 
 
-      if (previousPosition === _reactWaypoint2.default.above || previousPosition === _reactWaypoint2.default.below) {
+      if (previousPosition === _reactWaypoint.Waypoint.above || previousPosition === _reactWaypoint.Waypoint.below) {
         this.setState({
           currentIndex: index
         });
@@ -120,7 +118,7 @@ var PeripheralView = function (_Component) {
       var waypoints = [];
 
       var _loop = function _loop(i) {
-        waypoints[i - start] = _react2.default.createElement(_reactWaypoint2.default, _extends({}, i === currentIndex ? { ref: function ref(r) {
+        waypoints[i - start] = _react2.default.createElement(_reactWaypoint.Waypoint, _extends({}, i === currentIndex ? { ref: function ref(r) {
             return _this2.currentElement = r;
           } } : {}, {
           key: -(i + 1),

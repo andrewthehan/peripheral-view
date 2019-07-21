@@ -2,7 +2,7 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 
-import Waypoint from 'react-waypoint';
+import {Waypoint} from 'react-waypoint';
 
 class PeripheralView extends Component {
   constructor(props){
