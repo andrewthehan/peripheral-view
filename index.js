@@ -1,4 +1,4 @@
-'use strict';
+"use strict";
 
 Object.defineProperty(exports, "__esModule", {
   value: true
@@ -8,15 +8,15 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var _react = require('react');
+var _react = require("react");
 
 var _react2 = _interopRequireDefault(_react);
 
-var _reactDom = require('react-dom');
+var _reactDom = require("react-dom");
 
 var _reactDom2 = _interopRequireDefault(_reactDom);
 
-var _reactWaypoint = require('react-waypoint');
+var _reactWaypoint = require("react-waypoint");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -44,15 +44,20 @@ var PeripheralView = function (_Component) {
   }
 
   _createClass(PeripheralView, [{
-    key: 'scrollTo',
+    key: "scrollTo",
     value: function scrollTo(index) {
+      var handleChange = this.props.handleChange;
+
+
+      handleChange(index);
+
       this.setState({
         currentIndex: index,
         isScrolling: true
       });
     }
   }, {
-    key: 'componentDidUpdate',
+    key: "componentDidUpdate",
     value: function componentDidUpdate(prevProps, prevState) {
       var isScrolling = this.state.isScrolling;
 
@@ -68,10 +73,10 @@ var PeripheralView = function (_Component) {
         do {
           scrollableParent = scrollableParent.parentNode;
           if (scrollableParent == null) {
-            throw new Error('Unable to find scrollable parent.');
+            throw new Error("Unable to find scrollable parent.");
           }
           var overflowY = window.getComputedStyle(scrollableParent).overflowY;
-          isScrollable = overflowY !== 'visible' && overflowY !== 'hidden';
+          isScrollable = overflowY !== "visible" && overflowY !== "hidden";
         } while (!isScrollable || scrollableParent.scrollHeight < scrollableParent.clientHeight);
 
         scrollableParent.scrollTop = node.offsetTop - scrollableParent.offsetTop;
@@ -82,20 +87,25 @@ var PeripheralView = function (_Component) {
       }
     }
   }, {
-    key: 'handleWaypoint',
+    key: "handleWaypoint",
     value: function handleWaypoint(wp, index) {
       var previousPosition = wp.previousPosition,
           currentPosition = wp.currentPosition;
 
 
       if (previousPosition === _reactWaypoint.Waypoint.above || previousPosition === _reactWaypoint.Waypoint.below) {
+        var handleChange = this.props.handleChange;
+
+
+        handleChange(index);
+
         this.setState({
           currentIndex: index
         });
       }
     }
   }, {
-    key: 'render',
+    key: "render",
     value: function render() {
       var _this2 = this;
 
