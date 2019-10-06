@@ -49,7 +49,9 @@ var PeripheralView = function (_Component) {
       var handleChange = this.props.handleChange;
 
 
-      handleChange(index);
+      if (handleChange) {
+        handleChange(index);
+      }
 
       this.setState({
         currentIndex: index,
@@ -97,7 +99,9 @@ var PeripheralView = function (_Component) {
         var handleChange = this.props.handleChange;
 
 
-        handleChange(index);
+        if (handleChange) {
+          handleChange(index);
+        }
 
         this.setState({
           currentIndex: index

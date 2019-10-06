@@ -18,7 +18,9 @@ class PeripheralView extends Component {
   scrollTo(index) {
     const { handleChange } = this.props;
 
-    handleChange(index);
+    if (handleChange) {
+      handleChange(index);
+    }
 
     this.setState({
       currentIndex: index,
@@ -66,7 +68,9 @@ class PeripheralView extends Component {
     ) {
       const { handleChange } = this.props;
 
-      handleChange(index);
+      if (handleChange) {
+        handleChange(index);
+      }
 
       this.setState({
         currentIndex: index
